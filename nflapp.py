@@ -14,6 +14,8 @@ def load_data():
     return data
 
 data = load_data()
+logos = pd.read_csv("https://raw.githubusercontent.com/leesharpe/nfldata/master/data/logos.csv")
+
 #indicator for W/L/T
 data['home_win'] = data['score_home'] > data['score_away']
 data['away_win'] = data['score_home'] < data['score_away']
@@ -87,29 +89,24 @@ df_sb = pd.concat((df_sb_a, df_sb_h))
 
 df_sb = df_sb.loc[df_sb.win == True][['schedule_season','team']]
 
-nfl_dict = {"Oakland Raiders":"OAK.png","Denver Broncos":"DEN.png","Buffalo Bills":"BUF.png","New York Jets":"NYJ.png","Baltimore Colts":"IND.png","New England Patriots":"NE.png","Los Angeles Rams":"LA.png","Kansas City Chiefs":"KC.png","Chicago Bears":"CHI.png","New York Giants":"NYG.png",
-            "Minnesota Vikings":"MIN.png","Philadelphia Eagles":"PHI.png","Cleveland Browns":"CLE.png","Miami Dolphins":"MIA.png","Green Bay Packers":"GB.png","Houston Oilers":"TEN.png","Atlanta Falcons":"ATL.png","Detroit Lions":"DET.png",
-            "Washington Redskins":"WAS.png","San Francisco 49ers":"SF.png","St. Louis Cardinals":"ARI.png","San Diego Chargers":"LAC.png","Dallas Cowboys":"DAL.png","Pittsburgh Steelers":"PIT.png","New Orleans Saints":"NO.png",
-            "Cincinnati Bengals":"CIN.png","Boston Patriots":"NE.png","Tampa Bay Buccaneers":"TB.png","Seattle Seahawks":"SEA.png","Los Angeles Raiders":"OAK.png",
-            "Indianapolis Colts":"IND.png",
-            "Phoenix Cardinals":"ARI.png",
-            "Arizona Cardinals":"ARI.png",
-            "Carolina Panthers":"CAR.png",
-            "St. Louis Rams":"LA.png",
-            "Jacksonville Jaguars":"JAX.png",
-            "Baltimore Ravens":"BAL.png",
-            "Tennessee Oilers":"TEN.png",
-            "Tennessee Titans":"TEN.png",
-            "Houston Texans":"HOU.png",
-            "Los Angeles Chargers":"LAC.png",
-            "Las Vegas Raiders":"OAK.png",
-            "Washington Football Team":"WAS.png"}
+nfl_dict = {"Oakland Raiders":"OAK","Denver Broncos":"DEN","Buffalo Bills":"BUF","New York Jets":"NYJ",
+            "Baltimore Colts":"IND","New England Patriots":"NE","Los Angeles Rams":"LA","Kansas City Chiefs":"KC",
+            "Chicago Bears":"CHI","New York Giants":"NYG","Minnesota Vikings":"MIN","Philadelphia Eagles":"PHI",
+            "Cleveland Browns":"CLE","Miami Dolphins":"MIA","Green Bay Packers":"GB","Houston Oilers":"TEN",
+            "Atlanta Falcons":"ATL","Detroit Lions":"DET","Washington Redskins":"WAS","San Francisco 49ers":"SF",
+            "St. Louis Cardinals":"ARI","San Diego Chargers":"LAC","Dallas Cowboys":"DAL","Pittsburgh Steelers":"PIT",
+            "New Orleans Saints":"NO","Cincinnati Bengals":"CIN","Boston Patriots":"NE","Tampa Bay Buccaneers":"TB",
+            "Seattle Seahawks":"SEA","Los Angeles Raiders":"OAK","Indianapolis Colts":"IND","Phoenix Cardinals":"ARI",
+            "Arizona Cardinals":"ARI","Carolina Panthers":"CAR","St. Louis Rams":"LA","Jacksonville Jaguars":"JAX",
+            "Baltimore Ravens":"BAL","Tennessee Oilers":"TEN","Tennessee Titans":"TEN","Houston Texans":"HOU",
+            "Los Angeles Chargers":"LAC","Las Vegas Raiders":"OAK","Washington Football Team":"WAS"}
 
 
 year = st.selectbox(
      'Select a Season',list(df_sb.schedule_season.unique()))
 
 team = list(df_sb.loc[df_sb.schedule_season == year]['team'])[0]
+logo_image = logos.loc[logos.team == nfl_dict[team]]['team_logo'].item()
 
 
-st.image('NFLteamlogos/'+nfl_dict[team], caption=team)
+st.image(logo_image, caption=team)
