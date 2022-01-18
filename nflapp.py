@@ -4,6 +4,7 @@ import numpy as np
 
 st.title("NFL Records")
 
+#read in data
 DATA_URL = ('nfl_scores.csv')
 
 def load_data():
