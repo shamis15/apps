@@ -60,7 +60,7 @@ df_2 = df_2.groupby(['schedule_season','team'])['win'].sum().reset_index()
 df_2 = df_2.set_index('schedule_season')
 
 options = st.selectbox(
-     'Select your team',list(df_2.team.unique()))
+     'Select Team',list(df_2.team.unique()))
 
 st.write(options,' Wins by Season')
 
