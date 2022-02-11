@@ -310,7 +310,7 @@ else:
         col2.metric(label='Touchdown',value=f'{100*Touchdown:.0f}%')
 
 
-       st.subheader('Who will be the Super Bowl MVP?')
+        st.subheader('Who will be the Super Bowl MVP?')
 
         col1, col2, col3 = st.columns(3)
 
