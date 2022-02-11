@@ -199,7 +199,7 @@ else:
 
     db_content = db.fetch().items
     df = pd.DataFrame(db_content)
-    #st.write(list(df.columns))
+    st.write(list(df.columns))
     order = [8,1,9,0,2,14,10,11,7,13,3,4,5,12]
     cols = [df.columns[i] for i in order]
     df = df[cols]
