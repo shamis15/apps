@@ -194,6 +194,8 @@ else:
 
         # Every form must have a submit button.
     if submitted:
+        st.write("Thank you!")
+        st.balloons()
         db.put({"name": name,"coin": coin,"zemail": zemail,"sack": sack,"anthem": anthem,"color": color,"color2": color2,"score": score,"team_score": team_score,"mvp": mvp,"winner": winner,
         "commercial": commercial,"eminem": eminem, "field_goal": field_goal,"tie_breaker": tie_breaker})
 
@@ -284,7 +286,7 @@ else:
         col1.metric(label='Heads',value=f'{100*Heads:.0f}%')
         col2.metric(label='Tails',value=f'{100*Tails:.0f}%')
 
-        st.subheader('Who will be sacked first?')
+        st.subheader('Who will have the first sack?')
 
         col1, col2 = st.columns(2)
         
