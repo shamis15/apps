@@ -165,7 +165,7 @@ else:
     st.title('Super Bowl LVI')
 
     st.write('Here is how it works:')
-    st.write("1.Fill out your predictions  \n2.If you want to be part of the pool - venmo me $5. WINNER TAKES ALL  \n3.Enjoy the Super Bowl!")
+    st.write("1.Fill out your predictions  \n2.If you want to be part of the pool - venmo $5 - @jessi-shamis (code:5933). WINNER TAKES ALL  \n3.Enjoy the Super Bowl!")
     
 
     
