@@ -164,10 +164,8 @@ else:
 
     st.title('Super Bowl LVI')
 
-    st.write('Here is how it works:')
-    st.write('1.Fill out your predictions')
-    st.write('2.If you want to be part of the pool - venmo me $5. WINNER TAKES ALL')
-    st.write('3.Enjoy the Super Bowl!')
+    st.write('Here is how it works: \n2 1.Fill out your predictions \n2 2.If you want to be part of the pool - venmo me $5. WINNER TAKES ALL \n2 3.Enjoy the Super Bowl!')
+    
 
     
     with st.form("my_form"):
