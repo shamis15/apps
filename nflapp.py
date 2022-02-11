@@ -1,11 +1,18 @@
 import streamlit as st
 import pandas as pd 
 import numpy as np 
+from deta import Deta
+
+deta = Deta(st.secrets["deta_key"])
+db = deta.Base("prop_bets-db")
+
+#deta = Deta(st.secrets["deta_key"])
+#db = deta.Base("nfl")
 
 
 add_selectbox = st.sidebar.selectbox(
     "Select League ",
-    ("NFL", "NFL Draft")
+    ("NFL", "NFL Draft","Super Bowl Predictions")
 )
 
 if add_selectbox == "NFL":
@@ -121,7 +128,7 @@ if add_selectbox == "NFL":
 
 
 
-else:
+elif add_selectbox == "NFL Draft":
     st.title('NFL Draft')
 
     st.write('Wanting a first round draft spot? Figure out the position with the best chance.')
@@ -153,14 +160,59 @@ else:
 
     st.bar_chart(seasons['number_players'])
 
+else:
+
     with st.form("my_form"):
         st.write("Inside the form")
-        slider_val = st.slider("Form slider")
-        checkbox_val = st.checkbox("Form checkbox")
+        name = st.text_input("Your name")
+        coin = st.selectbox('What will the coin toss be?',
+        ('Heads', 'Tails'))
+        sack = st.selectbox('Who will have the fist sack of the game?',
+        ('Bengals', 'Rams'))
+        anthem = st.slider("Will the anthem be over or under 1m 50 sec", 0.00,2.3)
+        color = color = st.color_picker('What color will the Gatorade bath be?', '#00f900')
+        score = st.selectbox('What will the first score be?',('Field goal/Safety','Touchdown'))
+        team_score = st.selectbox('Who will score first?',('Bengals','Rams'))
+        mvp = st.selectbox('Who will be the Super Bowl',('Burrow','Stafford','others'))
+        winner = st.selectbox('Who will win the game?',('Bengals','Rams'))
+        commercial = st.selectbox('Which commercial will appear first?',('Coke','Budweiser'))
+        eminem = st.selectbox('Will Eminem perform Silm Shady?',("Yes","No"))
+        field_goal = st.slider('Will the longest field goal be over or under 45 yards?', 0,60)
+        tie_breaker = st.text_input('Tie Breaker: Total Combined Score')
+        submitted = st.form_submit_button("Save Picks")
+
 
         # Every form must have a submit button.
-        submitted = st.form_submit_button("Submit")
-        if submitted:
-            st.write("slider", slider_val, "checkbox", checkbox_val)
+    if submitted:
+        db.put({"name": name,"coin": coin,"sack": sack,"anthem": anthem,"color": color,"score": score,"team_score": team_score,"mvp": mvp,"winner": winner,
+        "commercial": commercial,"eminem": eminem, "field_goal": field_goal,"tie_breaker": tie_breaker})
 
-    st.write("Outside the form")
+
+    db_content = db.fetch().items
+    df = pd.DataFrame(db_content)
+    #df = df[['name',df.columns]]
+    #st.write(list(df.columns))
+    if st.checkbox('Show raw data'):
+        st.subheader('Raw data')
+        st.dataframe(df)
+
+    coin_df = df.groupby("coin")['name'].count()
+    heads = coin_df.iloc[0]/df['name'].count()
+    tails = coin_df.iloc[1]/df['name'].count()
+
+    sack_df = df.groupby("sack")['name'].count()
+    bengals = coin_df.iloc[0]/df['name'].count()
+    rams = coin_df.iloc[1]/df['name'].count()
+    
+
+    st.write(sack_df)
+
+    col1, col2 = st.columns(2)
+    
+    col1.metric(label='Percentage of Heads',value=heads)
+    col2.metric(label='Percentage of Tails',value=tails)
+
+
+
+
+    #st.metric('label', value, delta=None, delta_color="normal")
