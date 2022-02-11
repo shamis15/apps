@@ -167,7 +167,7 @@ else:
     st.write('Here is how it works:')
     st.write("1.Fill out your predictions  \n2.If you want to be part of the pool - venmo $5 - @jessi-shamis (code:5933). WINNER TAKES ALL  \n3.Enjoy the Super Bowl!")
     
-    st.label("Current Pot Size:")
+    st.write("Current Pot Size:")
     st.subheader("$40")
     
     with st.form("my_form"):
