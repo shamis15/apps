@@ -184,7 +184,7 @@ else:
         mvp = st.selectbox('Who will be the Super Bowl MVP',('Burrow','Stafford','others'))
         winner = st.selectbox('Who will win the game?',('Bengals','Rams'))
         commercial = st.selectbox('Which commercial will appear first?',('Coke','Budweiser'))
-        eminem = st.selectbox('Will Eminem perform Silm Shady?',("Yes","No"))
+        eminem = st.selectbox('Will Eminem perform Slim Shady?',("Yes","No"))
         field_goal = st.selectbox('Will the longest field goal be over or under 45 yards?',('Over 45','Under 45'))
         tie_breaker = st.slider('Tie Breaker: Total Combined Score',0,100)
         submitted = st.form_submit_button("Save Picks")
@@ -247,9 +247,22 @@ else:
     winner_df = df.groupby("winner")['name'].count()
     Bengals3 = winner_df.iloc[0]/df['winner'].count()
     Rams3 = winner_df.iloc[1]/df['winner'].count()
+    
+    #commercial
+    commercial_df = df.groupby("commercial")['name'].count()
+    Budweiser = commercial_df.iloc[0]/df['commercial'].count()
+    Coke = commercial_df.iloc[1]/df['commercial'].count()
 
-
-
+    #eminem
+    eminem_df = df.groupby("eminem")['name'].count()
+    No = eminem_df.iloc[0]/df['eminem'].count()
+    Yes = eminem_df.iloc[1]/df['eminem'].count()
+    
+    #longest yard
+    
+    field_goal_df = df.groupby("field_goal")['name'].count()
+    No = field_goal_df.iloc[0]/df['field_goal'].count()
+    Yes = field_goal_df.iloc[1]/df['field_goal'].count()
 
 
 
@@ -318,13 +331,26 @@ else:
         col3.metric(label='Other',value=f'{100*Other2:.0f}%')
 
 
-
         st.subheader('Who will win the game?')
 
         col1, col2 = st.columns(2)
 
         col1.metric(label='Bengals',value=f'{100*Bengals3:.0f}%')
         col2.metric(label='Rams',value=f'{100*Rams3:.0f}%')
+        
+        st.subheader('Which commerical will appear first?')
+
+        col1, col2 = st.columns(2)
+
+        col1.metric(label='Budweiser',value=f'{100*Budweiser:.0f}%')
+        col2.metric(label='Coke',value=f'{100*Coke:.0f}%')
+        
+        st.subheader('Will Eminem perform Slim Shady')
+        
+        col1, col2 = st.columns(2)
+
+        col1.metric(label='Yes',value=f'{100*Yes:.0f}%')
+        col2.metric(label='No',value=f'{100*No:.0f}%')
 
 
         st.subheader('TIE BREAKER: What will the total combined score be?')
