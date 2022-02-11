@@ -4,7 +4,7 @@ import numpy as np
 from deta import Deta
 
 deta = Deta(st.secrets["deta_key"])
-db = deta.Base("nfl_prop_bets-db")
+db = deta.Base("nfl_prop_bets-db-2")
 
 #deta = Deta(st.secrets["deta_key"])
 #db = deta.Base("nfl")
@@ -269,7 +269,7 @@ else:
         col1.metric(label='Heads',value=f'{100*Heads:.0f}%')
         col2.metric(label='Tails',value=f'{100*Tails:.0f}%')
 
-        st.header('Who will be sacked first?')
+        st.subheader('Who will be sacked first?')
 
         col1, col2 = st.columns(2)
         
@@ -277,14 +277,14 @@ else:
         col2.metric(label='Rams',value=f'{100*Rams:.0f}%')
 
 
-        st.header('Will the anthem be over or under 1m 50 sec?')
+        st.subheader('Will the anthem be over or under 1m 50 sec?')
 
         col1, col2 = st.columns(2)
         
         col1.metric(label='Under 1.50',value=f'{100*Under:.0f}%')
         col2.metric(label='Over',value=f'{100*Over:.0f}%')
 
-        st.header('What color will the Gatorade bath be?')
+        st.subheader('What color will the Gatorade bath be?')
 
         col1, col2, col3, col4 = st.columns(4)
 
@@ -294,7 +294,7 @@ else:
         col4.metric(label='Other',value=f'{100*Other:.0f}%')
 
 
-        st.header('Who will score first?')
+        st.subheader('Who will score first?')
 
         col1, col2 = st.columns(2)
 
@@ -302,7 +302,7 @@ else:
         col2.metric(label='Rams',value=f'{100*Rams2:.0f}%')
 
 
-        st.header('What will the first score be?')
+        st.subheader('What will the first score be?')
 
         col1, col2 = st.columns(2)
 
@@ -310,7 +310,7 @@ else:
         col2.metric(label='Touchdown',value=f'{100*Touchdown:.0f}%')
 
 
-        st.header('Who will be the Super Bowl MVP?')
+       st.subheader('Who will be the Super Bowl MVP?')
 
         col1, col2, col3 = st.columns(3)
 
@@ -328,7 +328,7 @@ else:
         col2.metric(label='Rams',value=f'{100*Rams3:.0f}%')
 
 
-        st.header('TIE BREAKER: What will the total combined score be?')
+        st.subheader('TIE BREAKER: What will the total combined score be?')
 
         st.metric(label='Avg Combined Score', value=f'{tie_score:.0f}')
 
