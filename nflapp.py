@@ -4,7 +4,7 @@ import numpy as np
 from deta import Deta
 
 deta = Deta(st.secrets["deta_key"])
-db = deta.Base("prop_bets-db")
+db = deta.Base("nfl_prop_bets-db")
 
 #deta = Deta(st.secrets["deta_key"])
 #db = deta.Base("nfl")
@@ -162,55 +162,181 @@ elif add_selectbox == "NFL Draft":
 
 else:
 
+    st.title('Super Bowl LVI')
+
+    st.write('Here is how it works:')
+    st.write('1.Fill out your predictions')
+    st.write('2.If you want to be part of the pool - venmo me $5. WINNER TAKES ALL')
+    st.write('3.Enjoy the Super Bowl!')
+
+    
     with st.form("my_form"):
         st.write("Inside the form")
-        name = st.text_input("Your name")
+        name = st.text_input("Your name (first and last)")
         coin = st.selectbox('What will the coin toss be?',
         ('Heads', 'Tails'))
         sack = st.selectbox('Who will have the fist sack of the game?',
         ('Bengals', 'Rams'))
-        anthem = st.slider("Will the anthem be over or under 1m 50 sec", 0.00,2.3)
+        anthem = st.selectbox("Will the anthem be over or under 1m 50 sec",('Under','Over'))
         color = color = st.color_picker('What color will the Gatorade bath be?', '#00f900')
+        color2 = st.selectbox('Just to be clear - what color did you choose?',('Red','Orange','Blue','Other'))
         score = st.selectbox('What will the first score be?',('Field goal/Safety','Touchdown'))
         team_score = st.selectbox('Who will score first?',('Bengals','Rams'))
-        mvp = st.selectbox('Who will be the Super Bowl',('Burrow','Stafford','others'))
+        mvp = st.selectbox('Who will be the Super Bowl MVP',('Burrow','Stafford','others'))
         winner = st.selectbox('Who will win the game?',('Bengals','Rams'))
         commercial = st.selectbox('Which commercial will appear first?',('Coke','Budweiser'))
         eminem = st.selectbox('Will Eminem perform Silm Shady?',("Yes","No"))
-        field_goal = st.slider('Will the longest field goal be over or under 45 yards?', 0,60)
-        tie_breaker = st.text_input('Tie Breaker: Total Combined Score')
+        field_goal = st.selectbox('Will the longest field goal be over or under 45 yards?',('Over 45','Under 45'))
+        tie_breaker = st.slider('Tie Breaker: Total Combined Score',0,100)
         submitted = st.form_submit_button("Save Picks")
 
 
         # Every form must have a submit button.
     if submitted:
-        db.put({"name": name,"coin": coin,"sack": sack,"anthem": anthem,"color": color,"score": score,"team_score": team_score,"mvp": mvp,"winner": winner,
+        db.put({"name": name,"coin": coin,"sack": sack,"anthem": anthem,"color": color,"color2": color2,"score": score,"team_score": team_score,"mvp": mvp,"winner": winner,
         "commercial": commercial,"eminem": eminem, "field_goal": field_goal,"tie_breaker": tie_breaker})
 
 
     db_content = db.fetch().items
     df = pd.DataFrame(db_content)
-    #df = df[['name',df.columns]]
     #st.write(list(df.columns))
-    if st.checkbox('Show raw data'):
-        st.subheader('Raw data')
+    order = [8,1,9,0,2,14,10,11,7,13,3,4,5,12]
+    cols = [df.columns[i] for i in order]
+    df = df[cols]
+    if st.checkbox('Show prediction by person'):
         st.dataframe(df)
 
+    #coin
     coin_df = df.groupby("coin")['name'].count()
-    heads = coin_df.iloc[0]/df['name'].count()
-    tails = coin_df.iloc[1]/df['name'].count()
+    Heads = coin_df.iloc[0]/df['coin'].count()
+    Tails = coin_df.iloc[1]/df['coin'].count()
 
+    #sack
     sack_df = df.groupby("sack")['name'].count()
-    bengals = coin_df.iloc[0]/df['name'].count()
-    rams = coin_df.iloc[1]/df['name'].count()
+    Bengals = sack_df.iloc[0]/df['sack'].count()
+    Rams = sack_df.iloc[1]/df['sack'].count()
+
+    #anthem
+    anthem_df = df.groupby("anthem")['name'].count()
+    Over = anthem_df.iloc[0]/df['anthem'].count()
+    Under = anthem_df.iloc[1]/df['anthem'].count()
+
+    #color 
+    color2_df = df.groupby("color2")['name'].count()
+    Blue = color2_df.iloc[0]/df['color2'].count()
+    Orange = color2_df.iloc[1]/df['color2'].count()
+    Other = color2_df.iloc[2]/df['color2'].count()
+    Red = color2_df.iloc[3]/df['color2'].count()
+
+    #score
+    score_df = df.groupby("score")['name'].count()
+    Field_goal = score_df.iloc[0]/df['score'].count()
+    Touchdown = score_df.iloc[1]/df['score'].count()
+
+    #team score
+    team_score_df = df.groupby("team_score")['name'].count()
+    Bengals2 = team_score_df.iloc[0]/df['team_score'].count()
+    Rams2 = team_score_df.iloc[1]/df['team_score'].count()
+
+    #mvp 
+    mvp_df = df.groupby("mvp")['name'].count()
+    Burrow = mvp_df.iloc[0]/df['mvp'].count()
+    Other2 = mvp_df.iloc[1]/df['mvp'].count()
+    Stafford = mvp_df.iloc[2]/df['mvp'].count()
+
+    #winner
+    winner_df = df.groupby("winner")['name'].count()
+    Bengals3 = winner_df.iloc[0]/df['winner'].count()
+    Rams3 = winner_df.iloc[1]/df['winner'].count()
+
+
+
+
+
+
+
+    #tie breaker
+    tie_score = df['tie_breaker'].astype(int).mean()
+
+
     
 
-    st.write(sack_df)
+    if st.checkbox('Need some help deciding? See what other people are predicting?'):
+        st.header('What will the coin toss be?')
 
-    col1, col2 = st.columns(2)
+        col1, col2 = st.columns(2)
+        
+        col1.metric(label='Heads',value=f'{100*Heads:.0f}%')
+        col2.metric(label='Tails',value=f'{100*Tails:.0f}%')
+
+        st.header('Who will be sacked first?')
+
+        col1, col2 = st.columns(2)
+        
+        col1.metric(label='Bengals',value=f'{100*Bengals:.0f}%')
+        col2.metric(label='Rams',value=f'{100*Rams:.0f}%')
+
+
+        st.header('Will the anthem be over or under 1m 50 sec?')
+
+        col1, col2 = st.columns(2)
+        
+        col1.metric(label='Under 1.50',value=f'{100*Under:.0f}%')
+        col2.metric(label='Over',value=f'{100*Over:.0f}%')
+
+        st.header('What color will the Gatorade bath be?')
+
+        col1, col2, col3, col4 = st.columns(4)
+
+        col1.metric(label='Red',value=f'{100*Red:.0f}%')
+        col2.metric(label='Blue',value=f'{100*Blue:.0f}%')
+        col3.metric(label='Orange',value=f'{100*Orange:.0f}%')
+        col4.metric(label='Other',value=f'{100*Other:.0f}%')
+
+
+        st.header('Who will score first?')
+
+        col1, col2 = st.columns(2)
+
+        col1.metric(label='Bengals',value=f'{100*Bengals2:.0f}%')
+        col2.metric(label='Rams',value=f'{100*Rams2:.0f}%')
+
+
+        st.header('What will the first score be?')
+
+        col1, col2 = st.columns(2)
+
+        col1.metric(label='Field Goal/ Safety',value=f'{100*Field_goal:.0f}%')
+        col2.metric(label='Touchdown',value=f'{100*Touchdown:.0f}%')
+
+
+        st.header('Who will be the Super Bowl MVP?')
+
+        col1, col2, col3 = st.columns(3)
+
+        col1.metric(label='Burrow',value=f'{100*Burrow:.0f}%')
+        col2.metric(label='Stafford',value=f'{100*Stafford:.0f}%')
+        col3.metric(label='Other',value=f'{100*Other2:.0f}%')
+
+
+
+        st.subheader('Who will win the game?')
+
+        col1, col2 = st.columns(2)
+
+        col1.metric(label='Bengals',value=f'{100*Bengals3:.0f}%')
+        col2.metric(label='Rams',value=f'{100*Rams3:.0f}%')
+
+
+        st.header('TIE BREAKER: What will the total combined score be?')
+
+        st.metric(label='Avg Combined Score', value=f'{tie_score:.0f}')
+
+
+
+
+
     
-    col1.metric(label='Percentage of Heads',value=heads)
-    col2.metric(label='Percentage of Tails',value=tails)
 
 
 
