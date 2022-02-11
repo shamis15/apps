@@ -174,7 +174,7 @@ else:
         name = st.text_input("Your name (first and last)")
         coin = st.selectbox('What will the coin toss be?',
         ('Heads', 'Tails'))
-        sack = st.selectbox('Who will have the fist sack of the game?',
+        sack = st.selectbox('Who will have the first sack of the game?',
         ('Bengals', 'Rams'))
         anthem = st.selectbox("Will the anthem be over or under 1m 50 sec",('Under','Over'))
         color = color = st.color_picker('What color will the Gatorade bath be?', '#00f900')
@@ -289,7 +289,7 @@ else:
         col2.metric(label='Rams',value=f'{100*Rams:.0f}%')
 
 
-        st.subheader('Will the anthem be over or under 1m 50 sec?')
+        st.subheader('Will the anthem be over or under 1m 50sec?')
 
         col1, col2 = st.columns(2)
         
