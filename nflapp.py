@@ -172,6 +172,7 @@ else:
     with st.form("my_form"):
         st.write("Inside the form")
         name = st.text_input("Your name (first and last)")
+        zemail = st.text_input("Your email")
         coin = st.selectbox('What will the coin toss be?',
         ('Heads', 'Tails'))
         sack = st.selectbox('Who will have the first sack of the game?',
@@ -192,12 +193,13 @@ else:
 
         # Every form must have a submit button.
     if submitted:
-        db.put({"name": name,"coin": coin,"sack": sack,"anthem": anthem,"color": color,"color2": color2,"score": score,"team_score": team_score,"mvp": mvp,"winner": winner,
+        db.put({"name": name,"coin": coin,"zemail": zemail,"sack": sack,"anthem": anthem,"color": color,"color2": color2,"score": score,"team_score": team_score,"mvp": mvp,"winner": winner,
         "commercial": commercial,"eminem": eminem, "field_goal": field_goal,"tie_breaker": tie_breaker})
 
 
     db_content = db.fetch().items
     df = pd.DataFrame(db_content)
+    df = df.loc[df["name"]!="Test"]
     #st.write(list(df.columns))
     order = [9,1,10,0,3,11,12,8,14,4,5,6,13]
     cols = [df.columns[i] for i in order]
