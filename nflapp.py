@@ -167,9 +167,9 @@ else:
     st.write('Here is how it works:')
     st.write("1.Fill out your predictions  \n2.If you want to be part of the pool - venmo $5 - @jessi-shamis (code:5933). WINNER TAKES ALL  \n3.Enjoy the Super Bowl!")
     
-    st.write("Current Pot Size:")
-    st.subheader("$40")
-    
+    st.metric(label='Current Pot Size', value='$40')
+
+  
     with st.form("my_form"):
         st.write("Inside the form")
         name = st.text_input("Your name (first and last)")
