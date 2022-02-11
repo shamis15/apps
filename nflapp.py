@@ -203,8 +203,8 @@ else:
     order = [9,1,10,0,1,3,11,12,8,14,4,5,6,13]
     cols = [df.columns[i] for i in order]
     df = df[cols]
-    if st.checkbox('Show prediction by person'):
-        st.dataframe(df)
+    #if st.checkbox('Show prediction by person'):
+        #st.dataframe(df)
 
     #coin
     coin_df = df.groupby("coin")['name'].count()
@@ -332,13 +332,3 @@ else:
 
         st.metric(label='Avg Combined Score', value=f'{tie_score:.0f}')
 
-
-
-
-
-    
-
-
-
-
-    #st.metric('label', value, delta=None, delta_color="normal")
