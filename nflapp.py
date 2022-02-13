@@ -209,7 +209,10 @@ else:
     #ADDING RESULTS
     df_score = pd.DataFrame()
     df_score['name'] = df['name']
-    df_score['coin_result'] = df['coin'] == 'Snails'
+    df_score['coin_result'] = df['coin'] == 'Heads'
+    df_score['anthem_result'] = df['anthem'] == "Over"
+    df_score['sack_result'] = df['sack'] == "Bengals"
+
     df_score['points'] = df_score.sum(axis=1)
     
 
@@ -372,6 +375,6 @@ else:
 
         st.metric(label='Avg Combined Score', value=f'{tie_score:.0f}')
 
-    st.header('SCOREBOARD')
-    df_score = df_score.sort_values(by='points', ascending=False)
-    st.dataframe(df_score[['name','points']])
+        st.header('SCOREBOARD')
+        df_score = df_score.sort_values(by='points', ascending=False)
+        st.dataframe(df_score[['name','points']])
