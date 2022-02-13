@@ -372,6 +372,6 @@ else:
 
         st.metric(label='Avg Combined Score', value=f'{tie_score:.0f}')
 
-        st.header('SCOREBOARD')
-        df_score = df_score.sort_values(by='points', ascending=False)
-        st.dataframe(df_score[['name','points']])
+    st.header('SCOREBOARD')
+    df_score = df_score.sort_values(by='points', ascending=False)
+    st.dataframe(df_score[['name','points']])
