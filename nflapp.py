@@ -212,6 +212,9 @@ else:
     df_score['coin_result'] = df['coin'] == 'Heads'
     df_score['anthem_result'] = df['anthem'] == "Over"
     df_score['sack_result'] = df['sack'] == "Bengals"
+    df_score['score_result'] = df['score'] == "Touchdown"
+    df_score['team_score_result'] = df['team_score'] == "Rams"
+    df_score['commercial_result'] = df['commercial'] == "Budweiser"
 
     df_score['points'] = df_score.sum(axis=1)
     
