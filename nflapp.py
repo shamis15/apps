@@ -167,7 +167,7 @@ else:
     st.write('Here is how it works:')
     st.write("1.Fill out your predictions  \n2.If you want to be part of the pool - venmo $5 - @jessi-shamis (code:5933). WINNER TAKES ALL  \n3.Enjoy the Super Bowl!")
     
-    st.metric(label='Current Pot Size', value='$75')
+    st.metric(label='Current Pot Size', value='$115')
 
   
     with st.form("my_form"):
@@ -203,6 +203,7 @@ else:
     db_content = db.fetch().items
     df = pd.DataFrame(db_content)
     df = df.loc[df["name"]!="Test"]
+    df = df.drop_duplicates(subset=['name'])
     #st.write(list(df.columns))
     order = [9,1,10,0,3,11,12,8,14,4,5,6,13]
     cols = [df.columns[i] for i in order]
@@ -361,4 +362,3 @@ else:
         st.subheader('TIE BREAKER: What will the total combined score be?')
 
         st.metric(label='Avg Combined Score', value=f'{tie_score:.0f}')
-
