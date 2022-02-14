@@ -215,6 +215,7 @@ else:
     df_score['score_result'] = df['score'] == "Touchdown"
     df_score['team_score_result'] = df['team_score'] == "Rams"
     df_score['commercial_result'] = df['commercial'] == "Budweiser"
+    df_score['eminem_result'] = df['eminem'] == "No"
 
     df_score['points'] = df_score.sum(axis=1)
     
