@@ -219,6 +219,9 @@ else:
     df_score['field_goal_result'] = df['field_goal'] == "Under 45"
     df_score['color_result'] = df['color'] == "Blue"
     df_score['winner_result'] = df['winner'] == "Rams"
+    df_score['mvp_result'] = df['mvp'] == "others"
+    df_score['tie_breaker'] = df['tie_breaker'] == 44
+    
 
     
 
