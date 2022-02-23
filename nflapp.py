@@ -38,7 +38,7 @@ if add_selectbox == "NFL":
     data['home_win'] = data['score_home'] > data['score_away']
     data['away_win'] = data['score_home'] < data['score_away']
     data['tie'] = data['score_home'] == data['score_away']
-    if st.checkbox('Show raw data','help=foo'):
+    if st.checkbox('Show raw data',help='foo'):
         st.subheader('Raw data')
         st.write(data)
 
