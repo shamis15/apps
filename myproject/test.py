@@ -7,6 +7,10 @@ st.write("#### hello")
 st.write("hello")
 st.title('My title')
 st.header('header')
+# Two equal columns: 
+col1, col2 = st.columns(2)
+col1.write("This is column 1")
+col2.write("This is column 2")
 with st.echo():
   st.write('jess')
 st.code('for i in range(8): foo()')
