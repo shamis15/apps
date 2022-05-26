@@ -7,7 +7,8 @@ st.write("#### hello")
 st.write("hello")
 st.title('My title')
 st.header('header')
-st.progress(range(10))
+my_bar = st.progress(0)
+
 st.success('success message')
 # Two equal columns: 
 col1, col2 = st.columns(2)
