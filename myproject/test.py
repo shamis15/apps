@@ -11,7 +11,6 @@ my_bar = st.progress(7)
 st.error('Error message')
 st.warning('Warning message')
 st.info('Info message')
-st.exception(e)
 
 st.success('success message')
 # Two equal columns: 
