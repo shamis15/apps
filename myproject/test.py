@@ -8,6 +8,8 @@ st.write("hello")
 st.title('My title')
 st.header('header')
 my_bar = st.progress(7)
+st.error('Error message')
+
 
 st.success('success message')
 # Two equal columns: 
