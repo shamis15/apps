@@ -44,6 +44,12 @@ st.markdown('Markdown- this is some `code`') # see *
 st.latex(r''' e^{i\pi} + 1 = 0 ''')
 st.write(['st', 'is <', 3]) # see *
 
+st.expander("See explanation"):
+     st.write("""
+         The chart above shows some numbers I picked for you.
+         I rolled actual dice for these, so they're *guaranteed* to
+         be random.
+
 
 
 
