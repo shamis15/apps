@@ -44,10 +44,6 @@ st.markdown('Markdown- this is some `code`') # see *
 st.latex(r''' e^{i\pi} + 1 = 0 ''')
 st.write(['st', 'is <', 3]) # see *
 
-df = pd.DataFrame(
-    np.random.randn(50, 20),
-    columns=('col %d' % i for i in range(20)))
 
-st.dataframe(df) 
 
 
