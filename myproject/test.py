@@ -29,6 +29,7 @@ col2.write("Lorem Ipsum is simply dummy text of the printing and typesetting ind
 with st.echo():
   st.write('jess')
 st.code('for i in range(8): foo()')
+st.text_input('hello', help='this is a help warning')
 st.subheader('caption')
 st.number_input('Pick a number',4,10)
 st.date_input('your birthday')
