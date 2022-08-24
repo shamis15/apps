@@ -11,7 +11,7 @@ my_bar = st.progress(7)
 st.error('Error message')
 st.warning('Warning message')
 st.info('Info message')
-if st.button('Say hello', help='help here'):
+if st.button('Say hello', help='help here',disabled=true):
      st.write('Why hello there')
 
 
