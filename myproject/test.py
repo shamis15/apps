@@ -21,6 +21,13 @@ col2.metric("Wind", "9 mph", "-8%")
 col3.metric("Humidity", "86%", "4%")
 st.success('success message')
 
+st.text_input(
+      'Caption goes here',
+      
+      
+      placeholder='Placeholder goes here', 
+    )
+
 
 # Two equal columns: 
 col1, col2 = st.columns(2)
@@ -42,7 +49,10 @@ st.text_area('Text to translate')
 st.select_slider('Pick a size', ['S', 'M', 'L'])
 st.text_input('First name')
 st.multiselect('Buy', ['milk', 'apples', 'potatoes'])
-st.text('hello')
+st.text('Oh boy — were officially back'
+        'Today is the day we can hack' 
+        'I’m pumped, how ‘bout you For hackathon ’22' 
+        'Now lets get working before we have a snack')
 st.markdown('Markdown- this is some `code`') # see *
 st.latex(r''' e^{i\pi} + 1 = 0 ''')
 st.write(['st', 'is <', 3]) # see *
