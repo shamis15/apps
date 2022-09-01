@@ -27,7 +27,7 @@ st.text_input(
       
       placeholder='Placeholder goes here', 
     )
-st.checkbox('this is a test',disabled=False)
+st.checkbox('this is a test',disabled=True)
 
 # Two equal columns: 
 col1, col2 = st.columns(2)
