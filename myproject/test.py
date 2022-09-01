@@ -66,6 +66,9 @@ with st.expander("See explanation"):
          be random.
      """)
      st.image("https://static.streamlit.io/examples/dice.jpg")
+     
+age = st.slider('How old are you?', 0, 130, 25, help="help me")
+st.write("I'm ", age, 'years old')
 
 
 
