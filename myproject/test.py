@@ -67,8 +67,8 @@ with st.expander("See explanation"):
      """)
      st.image("https://static.streamlit.io/examples/dice.jpg")
      
-age = st.slider('How old are you?', 0, 130, 25, help="help me", disabled=true)
-
+age = st.slider('How old are you?', 0, 130, 25, disabled=True)
+st.write("I'm ", age, 'years old')
 
 
 
