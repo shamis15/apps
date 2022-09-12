@@ -48,7 +48,7 @@ st.camera_input('take a picture',help='smile for the camera')
 st.text_area('Text to translate')
 st.select_slider('Pick a size', ['S', 'M', 'L'])
 st.text_input('First name')
-st.multiselect('Buy', ['milk', 'apples', 'potatoes'])
+st.multiselect('Buy', ['milk', 'apples', 'potatoes'], disabled=True)
 st.text('Oh boy — were officially back\n'
         'Today is the day we can hack\n' 
         'I’m pumped, how ‘bout you For hackathon ’22\n' 
