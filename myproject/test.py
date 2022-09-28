@@ -71,5 +71,11 @@ age = st.slider('How old are you?', 0, 130, 25, disabled=True)
 st.write("I'm ", age, 'years old')
 
 
+st.text_input(
+  'Caption goes here',
+  placeholder='Placeholder goes here',
+  help='Help message goes here'
+)
+
 
 
