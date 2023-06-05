@@ -72,7 +72,7 @@ st.write("I'm ", age, 'years old')
 
 
 st.text_input(
-  'Caption goes here',
+  'Caption goes here, or does it...',
   placeholder='Placeholder goes here',
   help='Help message goes here'
 )
